@@ -8,7 +8,6 @@ XML = 'currency.xml'
 
 def count_long_titles(csv_filename,max_length):
     
-    
     count = 0
     with open(csv_filename, mode="r", encoding="cp1251") as f: # mode = "r" == для чтения; или utf-8 в encoding
         reader = csv.DictReader(f, delimiter=";")
@@ -53,7 +52,7 @@ def generate_bibliography(csv_path):
             # Записываем строку вида: "1. Автор. Название - Год"
             txt_file.write(f"{num}. {author}. {title} - {year}\n")
             
-    print("Задание 3 выполнено! Файл 'links.txt' создан.")
+    print("Файл 'links.txt' создан.")
 
 
 def parse_xml(xml_path):
@@ -73,9 +72,8 @@ def parse_xml(xml_path):
         
         # Добавляем данные в списки (заменяем запятую на точку, чтобы Python понял число)
         char_codes.append(code)
-        values.append(float(val.replace(',', '.')))
-        
-    print("\nЗадание 4 выполнено!")
+        values.append(float(val.replace(',', '.')))    
+    
     print("Список кодов валют:", char_codes[:5], "... (и так далее)")
     print("Список значений:", values[:5], "... (и так далее)")
 
@@ -104,7 +102,6 @@ def get_tags(csv_path):
         # Превращаем их в список, чтобы вывести на экран
         headers = list(reader.fieldnames)
         
-    
     print("Перечень заголовков (тегов)", headers)
 
 
