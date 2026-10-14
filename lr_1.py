@@ -1,6 +1,7 @@
 import time
-import math
+import os
 
+BLUE = "\u001b[44m"
 WHITE = '\u001b[107m'
 YELLOW = '\u001b[43m'
 GREEN = '\u001b[42m'
@@ -8,6 +9,10 @@ RED = '\u001b[41m'
 RESET = '\u001b[0m'
 BEGIN = '\u001b[1G'
 ERASE = '\u001b[2K'
+RED_2 = '\u001b[31m'
+BLUE_2 = "\u001b[34m"
+GREEN_2 = '\u001b[32m'
+YELLOW_2 = '\u001b[33m'
 
 def flag_Litvi():
     height = 9
@@ -51,8 +56,28 @@ def file_uslovie():
             even.append(num)
         else:
             odd.append(num)
-    summa_even, summa_odd = sum(even),sum(odd)
-    
+    if len(odd) > 0:
+        avg_odd = sum(odd) / len(odd)
+    else:
+        avg_odd = 0
+    if len(even) > 0:
+        avg_even = sum(even) / len(even)
+    else:
+        avg_even = 0
+
+    total_avg = avg_even + avg_odd
+    prct_even = (avg_even/total_avg) * 100
+    prct_odd = (avg_odd/total_avg) * 100
+
+    bar_length = 100
+    fill_odd = round((prct_odd / 100) * bar_length)
+    fill_even = bar_length - fill_odd
+
+    file.close()
+
+    print("\nДиаграмма соотношения:")
+    print(f"Нечётные: [{RED}{' ' * fill_odd}{RESET}] {prct_odd:.1f}%")
+    print(f"Чётные:   [{BLUE}{' ' * fill_even}{RESET}] {prct_even:.1f}%")
 
 
 def grafik(n):
@@ -65,14 +90,38 @@ def grafik(n):
     matrix_grafika[n][0] = 'L'
     for i in range(n):#тк n+1,то снизу есть доп линия,можно не переживать
         for j in range(1,n+1):#от 1 чтобы | штуки не удалились
-            if i + j  == n:
+            if i + j  == n:# по побочной диагонали матрицы
                 matrix_grafika[i][j] = f'{WHITE} {RESET}'
     for row in matrix_grafika:
         print(''.join(row))
 
 
+def run_animation():
+    frames = [
+        f"{RED_2}  .  {RESET}",      # Кадр 1: маленькая красная точка
+        f"{YELLOW_2} o o {RESET}",   # Кадр 2: жёлтые круги побольше
+        f"{GREEN_2}( O ){RESET}",    # Кадр 3: зелёный большой круг
+        f"{BLUE_2} o o {RESET}"      # Кадр 4: синие сжимающийся круги
+    ]
+    print("Запуск анимации...")
+    time.sleep(1)
 
+    for _ in range(3):
+        for frame in frames:
+            os.system("cls")
 
-    
+            # Возвращаем курсор в верхний левый угол (ESC-последовательность \033[H)
+            print("\033[H") 
+            print("--- АНИМАЦИЯ ---")
+            print("\n" * 2 + "     " + frame + "\n" * 2)
+            print("----------------")
+            time.sleep(0.5)
+    os.system("cls")
+    print("Анимация завершена!")
 
+#flag_Litvi()
+#Usor_e()
+# file_uslovie()
+# grafik(20)
+run_animation()
 
