@@ -47,9 +47,10 @@ def generate_bibliography(csv_path):
         for num, book in enumerate(random_books, 1):
             author = book['Автор']
             title = book['Название']
-            year = book['Дата поступления'] # Если в таблице просто 'Год', замените на 'Год'
+            full_date = str(book['Дата поступления'])
+            year = full_date[6:10]
             
-            # Записываем строку вида: "1. Автор. Название - Год"
+            
             txt_file.write(f"{num}. {author}. {title} - {year}\n")
             
     print("Файл 'links.txt' создан.")
