@@ -46,7 +46,8 @@ def play_8bit_music():
         (440, 150), (494, 150), (466, 150), (440, 150),
         (392, 120), (659, 120), (784, 120), (880, 150), (698, 120), (784, 120),
         (0, 150), (659, 150), (0, 150), (523, 150), (587, 150), (494, 150)
-    ]
+    ] # Super Mario Bros
+    
     while True:
         for freq, duration in melody:
             if freq == 0:
@@ -81,8 +82,8 @@ frame_input.grid(row=1, column=3, pady=5)
 label_input = tk.Label(frame_input, text="Входной блок:", font=("Courier New", 11), bg=bg_elements, fg="#cdd6f4")
 label_input.grid(row=0, column=0, padx=5)
 
-entry_input = tk.Entry(frame_input, font=("Courier New", 12, "bold"), width=10, bg="#313244", fg="#cdd6f4", insertbackground="#cdd6f4", justify="center")
-entry_input.grid(row=0, column=1, padx=5)
+ENTRY_INPUT = tk.Entry(frame_input, font=("Courier New", 12, "bold"), width=10, bg="#313244", fg="#cdd6f4", insertbackground="#cdd6f4", justify="center")
+ENTRY_INPUT.grid(row=0, column=1, padx=5)
 
 # Кнопка генерации
 btn_generate = tk.Button(
@@ -101,7 +102,7 @@ btn_generate = tk.Button(
 btn_generate.grid(row=2, column=3, pady=20)
 
 # Поле результата
-entry_result = tk.Entry(
+ENTRY_RESULT = tk.Entry(
     window, 
     font=("Courier New", 14, "bold"), 
     width=23, 
@@ -111,7 +112,7 @@ entry_result = tk.Entry(
     justify="center",
     state="readonly"
 )
-entry_result.grid(row=3, column=3, pady=5)
+ENTRY_RESULT.grid(row=3, column=3, pady=5)
 
 music_thread = threading.Thread(target=play_8bit_music, daemon=True)
 music_thread.start()
