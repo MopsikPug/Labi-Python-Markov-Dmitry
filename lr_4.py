@@ -16,7 +16,15 @@ def check_combinations_for_capacity(max_cells):
         return valid_combos
 
 
-
+def inventory_combos(solutions):
+    for index, (combo, score) in enumerate(solutions, 1):
+            inventory_new2 = []
+            for sym, size, val in combo:
+                inventory_new2.extend([f"[{sym}]"] * size)
+            inventory_2d_new = [inventory_new2[i:i+cols] for i in range(0, total_capacity, cols)]
+            print(f" {index}. Набор:")   
+            for row in inventory_2d_new:
+                print(",".join(row))
 
 ITEMS_DATA = {
     "Винтовка": ("r", 3, 25),
@@ -79,20 +87,19 @@ print()
 solutions_for_7 = check_combinations_for_capacity(7)
     
 if len(solutions_for_7) == 0:
-    print("РЕШЕНИЙ НЕ СУЩЕСТВУЕТ (доказано полным перебором)")
+    print("РЕШЕНИЙ ДЛЯ 7 ЯЧЕЕК НЕ СУЩЕСТВУЕТ (доказано полным перебором)")
 else:
     print(f"Найдено решений: {len(solutions_for_7)}")
+    for index, (combo, score) in enumerate(solutions_for_7, 1):
+        inventory_new2 = []
+        for sym, size, val in combo:
+            inventory_new2.extend([f"[{sym}]"] * size)
+        inventory_2d_new = [inventory_new2[i:i+cols] for i in range(0, total_capacity, cols)]
+        print(f" {index}. Набор:")   
+        for row in inventory_2d_new:
+            print(",".join(row))
 print()
 
 solutions_for_8 = check_combinations_for_capacity(8)
 print(f"Всего найдено подходящих комбинаций: {len(solutions_for_8)}")
-for index, (combo, score) in enumerate(solutions_for_8, 1):
-    
-    inventory_new = []
-    for sym, size, val in combo:
-        inventory_new.extend([f"[{sym}]"] * size)
-    inventory_2d_new = [inventory_new[i:i+cols] for i in range(0, total_capacity, cols)]
-    print(f" {index}. Набор:")   
-    for row in inventory_2d_new:
-        print(",".join(row))
-    print(f"| Итоговые очки: {score}")
+inventory_combos(solutions_for_8)
