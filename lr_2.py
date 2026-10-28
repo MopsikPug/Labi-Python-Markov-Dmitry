@@ -2,7 +2,7 @@ import csv
 import random
 import xml.etree.ElementTree as ET
 
-
+author_name = 'Людмила Петрановская'
 BOOKS = 'books.csv'
 XML = 'currency.xml'
 
@@ -30,7 +30,8 @@ def search_books_by_author(csv_filename, author_name):
             author = row.get("Автор") or row.get("Author") or ""
             if author_name.lower() in author.lower():
                 found_books.append(row)
-    return found_books
+    for row in found_books:
+        print(f"\n{row}")
 
 
 def generate_bibliography(csv_path):
@@ -106,8 +107,9 @@ def get_tags(csv_path):
     print("Перечень заголовков (тегов)", headers)
 
 
-#print(search_books_by_author(BOOKS, author_name))
+print(search_books_by_author(BOOKS, author_name))
 #print(count_long_titles(BOOKS,30))
 #generate_bibliography(BOOKS)
 #get_tags(BOOKS)
 #top_20_books(BOOKS)
+#parse_xml(XML)
