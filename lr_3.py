@@ -139,4 +139,5 @@ colours = ["#a1e3c2", "#c27373", "#a38249", "#7374c2"]
 # Передаем наш label_title и список цветов
 animate_title(label_title, colours)
 animate_title(btn_generate,colours)
+
 window.mainloop()

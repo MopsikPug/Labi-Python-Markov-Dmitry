@@ -41,9 +41,6 @@ ITEMS_DATA = {
     "Арбалет": ("c", 2, 20)
 }
 
-space_of_items = [ITEMS_DATA[item][1] for item in ITEMS_DATA]
-value_of_items = [ITEMS_DATA[item][2] for item in ITEMS_DATA]
-
 cols = 4
 rows = 2
 total_capacity = cols * rows

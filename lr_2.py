@@ -110,6 +110,6 @@ def get_tags(csv_path):
 #search_books_by_author(BOOKS, author_name)
 #print(count_long_titles(BOOKS,30))
 #generate_bibliography(BOOKS)
-get_tags(BOOKS)
+#get_tags(BOOKS)
 #top_20_books(BOOKS)
 #parse_xml(XML)
