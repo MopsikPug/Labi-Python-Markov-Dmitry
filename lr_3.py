@@ -56,7 +56,16 @@ def play_8bit_music():
                 winsound.Beep(freq, duration)
         time.sleep(0.5)
 
-# --- Создание интерфейса ---
+
+def animate_title(widget, colors, index=0):
+    # Меняем цвет текста у заголовка
+    widget.config(fg=colors[index])
+    # Вычисляем индекс следующего цвета
+    next_index = (index + 1) % len(colors)
+    # Повторяем вызов функции через 400 миллисекунд (не блокируя интерфейс)
+    widget.after(400, animate_title, widget, colors, next_index)
+
+#Создание интерфейса
 window = tk.Tk()
 window.title("Keygen for WarHammer")
 window.geometry("800x450")
@@ -66,23 +75,32 @@ bg_default = "#11111b"
 window.config(bg=bg_default)
 bg_image = tk.PhotoImage(file = "WarHammer.png")
 bg_elements = "#181825"
+
 bg_label = tk.Label(window, image=bg_image)
 bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 label_title = tk.Label(
     window, 
     text="KEYGEN", 
-    font=("Courier New", 18, "bold"), 
-)
+    font=("Courier New", 18, "bold"))
 label_title.grid(row=0, column=0, pady=20)
 # Контейнер ввода
 frame_input = tk.Frame(window, bg=bg_elements, padx=10, pady=5)
 frame_input.grid(row=1, column=3, pady=5)
 
-label_input = tk.Label(frame_input, text="Входной блок:", font=("Courier New", 11), bg=bg_elements, fg="#cdd6f4")
+label_input = tk.Label(frame_input, 
+                       text="Входной блок:", 
+                       font=("Courier New", 11), 
+                       bg=bg_elements, 
+                       fg="#cdd6f4")
 label_input.grid(row=0, column=0, padx=5)
 
-ENTRY_INPUT = tk.Entry(frame_input, font=("Courier New", 12, "bold"), width=10, bg="#313244", fg="#cdd6f4", insertbackground="#cdd6f4", justify="center")
+ENTRY_INPUT = tk.Entry(frame_input,
+                       font=("Courier New", 12, "bold"),
+                       width=10, bg="#313244",
+                       fg="#cdd6f4",
+                       insertbackground="#cdd6f4",
+                       justify="center")
 ENTRY_INPUT.grid(row=0, column=1, padx=5)
 
 # Кнопка генерации
@@ -96,9 +114,8 @@ btn_generate = tk.Button(
     activeforeground="#11111b",
     command=generate,
     cursor="hand2",
-    
-    relief="raised"
-)
+    relief="raised")
+
 btn_generate.grid(row=2, column=3, pady=20)
 
 # Поле результата
@@ -117,4 +134,9 @@ ENTRY_RESULT.grid(row=3, column=3, pady=5)
 music_thread = threading.Thread(target=play_8bit_music, daemon=True)
 music_thread.start()
 
+colours = ["#a1e3c2", "#c27373", "#a38249", "#7374c2"] 
+
+# Передаем наш label_title и список цветов
+animate_title(label_title, colours)
+animate_title(btn_generate,colours)
 window.mainloop()
