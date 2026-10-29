@@ -2,7 +2,7 @@ import csv
 import random
 import xml.etree.ElementTree as ET
 
-author_name = 'Людмила Петрановская'
+author_name = input()
 BOOKS = 'books.csv'
 XML = 'currency.xml'
 
@@ -99,17 +99,17 @@ def top_20_books(csv_path):
 def get_tags(csv_path):
     with open(csv_path, mode='r', encoding='cp1251') as f:
         reader = csv.DictReader(f, delimiter=';')
-        
-        # У DictReader названия всех колонок (заголовки) лежат в свойстве fieldnames
-        # Превращаем их в список, чтобы вывести на экран
-        headers = list(reader.fieldnames)
-        
-    print("Перечень заголовков (тегов)", headers)
+        tags = set()
+        for info in reader:
+            tag = [c.strip() for c in info['Жанр книги'].split('#')]
+            tags.update(tag)
+    tags.discard('')    
+    print("Перечень тегов:", "; ".join(sorted(tags)))
 
 
-print(search_books_by_author(BOOKS, author_name))
+#search_books_by_author(BOOKS, author_name)
 #print(count_long_titles(BOOKS,30))
 #generate_bibliography(BOOKS)
-#get_tags(BOOKS)
+get_tags(BOOKS)
 #top_20_books(BOOKS)
 #parse_xml(XML)
