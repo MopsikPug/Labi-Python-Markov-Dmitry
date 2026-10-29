@@ -90,14 +90,7 @@ if len(solutions_for_7) == 0:
     print("РЕШЕНИЙ ДЛЯ 7 ЯЧЕЕК НЕ СУЩЕСТВУЕТ (доказано полным перебором)")
 else:
     print(f"Найдено решений: {len(solutions_for_7)}")
-    for index, (combo, score) in enumerate(solutions_for_7, 1):
-        inventory_new2 = []
-        for sym, size, val in combo:
-            inventory_new2.extend([f"[{sym}]"] * size)
-        inventory_2d_new = [inventory_new2[i:i+cols] for i in range(0, total_capacity, cols)]
-        print(f" {index}. Набор:")   
-        for row in inventory_2d_new:
-            print(",".join(row))
+    inventory_combos(solutions_for_7)
 print()
 
 solutions_for_8 = check_combinations_for_capacity(8)
