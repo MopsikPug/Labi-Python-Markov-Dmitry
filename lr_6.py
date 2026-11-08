@@ -102,18 +102,22 @@ def summa_capacity():
                     er += 1
                     print('Завершение программы')
                     exit()
+
                 if choice_1 in CLASSES_MAP:
                     DiskClass_1 = CLASSES_MAP[choice_1]
                     capacity_disk_1 = int(input("Введите ёмкость диска 1 для суммирования (в байтах, например, 734003200): "))
                     c1 += 1
+
                 else:
                     print('Некорректный тип диска!')
+
             while c2 == 0:
                 choice_2 = input("Какой второй диск вы хотите просуммировать? (Введите CD или DVD): ").strip().upper()
                 if choice_2 in CLASSES_MAP:
                     DiskClass_2 = CLASSES_MAP[choice_2]
                     capacity_disk_2 = int(input("Введите ёмкость диска 2 для суммирования (в байтах, например, 734003200): "))
                     c2 += 1
+                    
                 else:
                     print('Некорректный тип диска!')
 
