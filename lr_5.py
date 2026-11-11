@@ -5,8 +5,8 @@ def task_1(file):
     file_1 = open(file,mode= 'r', encoding='utf-8')
     text_1 = file_1.read()
 
-    reg_1_num = re.findall(r'[-+]?(?:\d+(?:\.\d+)?|\.\d+)',text_1) #или вместо первого /d (0|[1-9][0-9]*), если не надо,чтобы начиналось с 0
-    reg_1_num_add = re.findall(r'[\u00bc-\u00be]',text_1)
+    reg_1_num = re.findall(r'[-+]?(?:\d+(?:\.\d+)?|\.\d+)',text_1) #или вместо первого \d (0|[1-9][0-9]*), если не надо,чтобы начиналось с 0
+    reg_1_num_add = re.findall(r'[\u00bc-\u00be]',text_1) #для поиска обычных дробей по типу 1/2
     reg_1_words = re.findall(r'\b([a-zA-Z]{6}|[a-zA-Z]{8})\b',text_1)
     all_numbers = reg_1_num + reg_1_num_add
     file_1.close()  
