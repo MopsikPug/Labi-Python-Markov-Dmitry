@@ -33,10 +33,19 @@ def task_3(file):
     reg_id = re.findall(r' ([1-9]\d{0,2}) ', text_3)
     reg_surnames = re.findall(r'\b[A-Z][a-z]+\b', text_3)
     reg_emails = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', text_3)
-    reg_dates = re.findall(r'\b\d{4}-\d{2}-\d{2}\b', text_3)
     reg_sites = re.findall(r'https?://[^\s]+|www\.[^\s]+', text_3)
-    file_3.close
+    
+    #ФОРМАТ 1: Год в начале (ГГГГ-ММ-ДД)
+    dates_dash_1  = re.findall(r' (\d{4}-\d{2}-\d{2})', text_3)  # с дефисом
+    dates_dot_1   = re.findall(r' (\d{4}\.\d{2}\.\d{2})', text_3) # с точкой (точку экранируем \.)
+    dates_slash_1 = re.findall(r' (\d{4}/\d{2}/\d{2})', text_3)  # со слэшем
 
+    #ФОРМАТ 2: День в начале (ДД-ММ-ГГГГ)
+    dates_dash_2  = re.findall(r' (\d{2}-\d{2}-\d{4})', text_3)  # с дефисом
+    dates_dot_2   = re.findall(r' (\d{2}\.\d{2}\.\d{4})', text_3) # с точкой
+    dates_slash_2 = re.findall(r' (\d{2}/\d{2}/\d{4})', text_3)  # со слэшем
+
+    reg_dates = dates_dash_1 + dates_dot_1 + dates_slash_1 + dates_dash_2 + dates_dot_2 + dates_slash_2
     reg_id.insert(0,"")
     file_3.close()
 
