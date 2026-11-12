@@ -75,7 +75,6 @@ bg_default = "#11111b"
 window.config(bg=bg_default)
 bg_image = tk.PhotoImage(file = "WarHammer.png")
 bg_elements = "#181825"
-
 bg_label = tk.Label(window, image=bg_image)
 bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
