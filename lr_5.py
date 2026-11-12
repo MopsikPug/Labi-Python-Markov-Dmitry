@@ -5,8 +5,8 @@ def task_1(file):
     file_1 = open(file,mode= 'r', encoding='utf-8')
     text_1 = file_1.read()
 
-    reg_1_num = re.findall(r'[-+]?(?:\d+(?:\.\d+)?|\.\d+)',text_1) #или вместо первого \d (0|[1-9][0-9]*), если не надо,чтобы начиналось с 0
-    reg_1_num_add = re.findall(r'[\u00bc-\u00be]',text_1) #для поиска обычных дробей по типу 1/2
+    reg_1_num = re.findall(r'[-+]?(?:\d+(?:\.\d+|[\u00bc-\u00be\u2150-\u215f])?|\.\d+)',text_1) #или вместо первого \d (0|[1-9][0-9]*), если не надо,чтобы начиналось с 0
+    reg_1_num_add = re.findall(r'(?<!\d)[\u00bc-\u00be\u2150-\u215f]',text_1) #для поиска обычных дробей по типу 1/2 без целой части
     reg_1_words = re.findall(r'\b([a-zA-Z]{6}|[a-zA-Z]{8})\b',text_1)
     all_numbers = reg_1_num + reg_1_num_add
     file_1.close()  
@@ -30,10 +30,10 @@ def task_3(file):
     file_3 = open(file, mode='r', encoding='utf-8')
     text_3 = file_3.read()
 
-    reg_id = re.findall(r' ([1-9]\d{0,2}) ', text_3)
+    reg_id = re.findall(r'\s(\d+)(?=\s)',text_3)
     reg_surnames = re.findall(r'\b[A-Z][a-z]+\b', text_3)
     reg_emails = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', text_3)
-    reg_sites = re.findall(r'https?://[^\s]+|www\.[^\s]+', text_3)
+    reg_sites = re.findall(r' https?://(?:www\.)?[-a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}',text_3)
     
     #ФОРМАТ 1: Год в начале (ГГГГ-ММ-ДД)
     dates_dash_1  = re.findall(r' (\d{4}-\d{2}-\d{2})', text_3)  # с дефисом
@@ -46,11 +46,11 @@ def task_3(file):
     dates_slash_2 = re.findall(r' (\d{2}/\d{2}/\d{4})', text_3)  # со слэшем
 
     reg_dates = dates_dash_1 + dates_dot_1 + dates_slash_1 + dates_dash_2 + dates_dot_2 + dates_slash_2
-    reg_id.insert(0,"")
+    
     file_3.close()
 
     matrix = list(zip(reg_id, reg_surnames, reg_emails, reg_dates, reg_sites))
-    matrix.sort(key=lambda x: int(x[0]) if x[0] != "" else -1)
+    matrix.sort(key=lambda x: int(x[0]) if x[0].isdigit() else -1)
     
     # Записываем всё в csv-файл (используем zip, как в классических простых задачах)
     
@@ -76,16 +76,16 @@ def poisk_fragmentov(file):
     dates_dash_2  = re.findall(r' (\d{2}-\d{2}-\d{4})', text_add)  # с дефисом
     dates_dot_2   = re.findall(r' (\d{2}\.\d{2}\.\d{4})', text_add) # с точкой
     dates_slash_2 = re.findall(r' (\d{2}/\d{2}/\d{4})', text_add)  # со слэшем
-
     reg_dates = dates_dash_1 + dates_dot_1 + dates_slash_1 + dates_dash_2 + dates_dot_2 + dates_slash_2
     reg_emails = re.findall(r' ([\w\.-]+@[\w\.-]+\.\w+)', text_add)
-    reg_sites = re.findall(r' (https?://[^\s]+|www\.[^\s]+)', text_add)
-    print(*reg_dates)
+    
+    reg_sites = re.findall(r' https?://(?:www\.)?[-a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}',text_add)
+    print(*reg_dates)       
     print(*reg_emails)
     print(reg_sites)
 
 
-#task_1('task1-en.txt')
-#task_2('task2.html')
-#task_3('task3.txt')
-#poisk_fragmentov('task_add.txt')
+task_1('task1-en.txt')
+# task_2('task2.html')
+# task_3('task3.txt')
+# poisk_fragmentov('task_add.txt')
