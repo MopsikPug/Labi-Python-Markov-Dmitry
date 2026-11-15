@@ -1,5 +1,4 @@
 class OpticalDisk:
-
     def __init__(self,capacity_bytes: int, rpm: int, laser_width_nm: int):
         self.capacity = capacity_bytes     # Ёмкость в байтах
         self.rpm = rpm                     # Обороты в минуту (Rotations Per Minute)
@@ -41,7 +40,7 @@ class DVD(OpticalDisk):
         self.layers_count = layers_count
 
 
-    def avg_rotation_time(self) -> float:
+    def average_rotation_time(self) -> float:
         return (60 / self.rpm)
 
 if __name__ == "__main__":
@@ -74,7 +73,7 @@ if __name__ == "__main__":
 
         #Если объект успешно создан, выводим результаты расчетов
         if disk_object:
-            print(f"--- Результаты расчетов ---")
+            print(f"Результаты расчетов:")
             print(f"Пройдено байт лазером за 20 секунд: {disk_object.bytes_read_in_20_seconds():,.2f} байт")
             print(f"Среднее время одного оборота: {disk_object.average_rotation_time():.4f} сек.")
 
