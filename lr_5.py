@@ -85,7 +85,7 @@ def poisk_fragmentov(file):
     print(reg_sites)
 
 
-task_1('task1-en.txt')
+# task_1('task1-en.txt')
 # task_2('task2.html')
 # task_3('task3.txt')
 # poisk_fragmentov('task_add.txt')
