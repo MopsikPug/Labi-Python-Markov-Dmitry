@@ -5,8 +5,8 @@ def task_1(file):
     file_1 = open(file,mode= 'r', encoding='utf-8')
     text_1 = file_1.read()
 
-    reg_1_num = re.findall(r'[-+]?(?:\d+(?:\.\d+|[\u00bc-\u00be\u2150-\u215f])?|\.\d+)',text_1) #или вместо первого \d (0|[1-9][0-9]*), если не надо,чтобы начиналось с 0
-    reg_1_num_add = re.findall(r'(?<!\d)[\u00bc-\u00be\u2150-\u215f]',text_1) #для поиска обычных дробей по типу 1/2 без целой части
+    reg_1_num = re.findall(r'[-+]?(?:\d+(?:\.\d+|[\u00bc-\u00be\u2150-\u215f\u2189])?|\.\d+)',text_1) #или вместо первого \d (0|[1-9][0-9]*), если не надо,чтобы начиналось с 0
+    reg_1_num_add = re.findall(r'(?<!\d)[\u00bc-\u00be\u2150-\u215f\u2189]',text_1) #для поиска обычных дробей по типу 1/2 без целой части
     reg_1_words = re.findall(r'\b([a-zA-Z]{6}|[a-zA-Z]{8})\b',text_1)
     all_numbers = reg_1_num + reg_1_num_add
     file_1.close()  
@@ -77,7 +77,7 @@ def poisk_fragmentov(file):
     dates_dot_2   = re.findall(r' (\d{2}\.\d{2}\.\d{4})', text_add) # с точкой
     dates_slash_2 = re.findall(r' (\d{2}/\d{2}/\d{4})', text_add)  # со слэшем
     reg_dates = dates_dash_1 + dates_dot_1 + dates_slash_1 + dates_dash_2 + dates_dot_2 + dates_slash_2
-    reg_emails = re.findall(r' ([\w\.-]+@[\w\.-]+\.\w+)', text_add)
+    reg_emails = re.findall(r' ([\w\.-]+@[a-zA-Z\.-]+\.[a-z]+)', text_add)
     
     reg_sites = re.findall(r' https?://(?:www\.)?[-a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}',text_add)
     print(*reg_dates)       
